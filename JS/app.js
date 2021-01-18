@@ -15,6 +15,9 @@ var userattempt = 1;
 var firstimgindex; 
 var secondimgindex;
 var theirdimgindex; 
+var x1,x2,x3;
+var chartNames = [];
+var chartData =[];
 
 numberofattempts.addEventListener('click',attempts)
  function attempts (event){
@@ -62,7 +65,9 @@ new product ('usb', '../img/usb.gif');
 new product ('water-can', '../img/water-can.jpg');
 new product ('wine-glass', '../img/wine-glass.jpg');
 
+
 // console.log(product.prototype.allImg.length)
+
 
 function RandomIndex (){
     return Math.floor(Math.random()*product.prototype.allImg.length );
@@ -73,17 +78,27 @@ function RandomIndex (){
 
  function renderingThreeImg(){
 
+    x1= firstimgindex;
+    x2= secondimgindex;
+    x3= theirdimgindex; 
+
     firstimgindex = RandomIndex();
     
     // do{
         
     // }while (firstimgindex === secondimgindex);
-
+    
     do {
         secondimgindex = RandomIndex();
         theirdimgindex = RandomIndex();
     }while (theirdimgindex === secondimgindex || theirdimgindex === firstimgindex || firstimgindex === secondimgindex); 
-
+    
+    do {
+        firstimgindex = RandomIndex();
+        secondimgindex = RandomIndex();
+        theirdimgindex = RandomIndex();
+    }while ((firstimgindex=== x1 || firstimgindex=== x2 ||firstimgindex=== x3 )||(secondimgindex===x1 ||secondimgindex===x2||secondimgindex===x3)||(theirdimgindex===x1||theirdimgindex===x2||theirdimgindex===x3)||(theirdimgindex === secondimgindex || theirdimgindex === firstimgindex || firstimgindex === secondimgindex));
+     console.log ('presentpic1 ',firstimgindex ,'presentpic2 ' ,secondimgindex,'presentpic3 ',theirdimgindex,'previouspic1 ', x1,'previouspic2 ',x2,'previouspic3 ',x3);
     firstimg.src = product.prototype.allImg[firstimgindex].sourse ; 
     secondimg.src = product.prototype.allImg[secondimgindex].sourse ;
     theirdimg.src = product.prototype.allImg[theirdimgindex].sourse ;
@@ -110,6 +125,7 @@ if (userattempt<=minattempt){
 
     if (event.target.id === 'first-img'){
         product.prototype.allImg[firstimgindex].vote++;
+
         userattempt++ ; 
     }else if (event.target.id === 'second-img' ){
 product.prototype.allImg[secondimgindex].vote++;
@@ -120,23 +136,61 @@ userattempt++ ;
     }
     // console.log(event.target.id)
         renderingThreeImg();
-    
+       
 }else {
 firstimg.removeEventListener('click' , userchoise);
 secondimg.removeEventListener('click' , userchoise);
 theirdimg.removeEventListener('click', userchoise);
 
 } }
-// console.log(product.prototype.allImg);
+// // console.log(product.prototype.allImg);
+// for (var i=0; i<product.prototype.allImg.length;i++){
+//     chartNames.push(product.prototype.allImg[i].name);
+//     // chartData.push(product.prototype.allImg[i].vote);
+//     // console.log(i);
+// }
+
+// console.log(chartNames);
+// console.log(chartData);
 
 
 resultButton.addEventListener('click',finalresult)
 
 function finalresult () {
+    for (var i=0; i<product.prototype.allImg.length;i++){
+        chartNames.push(product.prototype.allImg[i].name);
+        chartData.push(product.prototype.allImg[i].vote);
+        // console.log(i);
+    }
+    
+    console.log(chartNames);
+    console.log(chartData);
+    
     var resultList = document.getElementById('result-list');
     var result;
    for (var i = 0 ; i <product.prototype.allImg.length ; i++){
        result = document.createElement ('li'); 
        result.textContent = product.prototype.allImg[i].name + ' had ' + product.prototype.allImg[i].vote + ' votes,and was seen ' + product.prototype.allImg[i].timeofrender + ' times';
        resultList.appendChild(result);  
-}}
+}
+console.log(chartData);
+var ctx = document.getElementById('result-chart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: chartNames,
+        datasets: [{
+            label: 'What coustemer prefare chart',
+            backgroundColor: 'gray',
+            borderColor: 'rgb(0,0,0)',
+            data: chartData
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+}

@@ -1,9 +1,18 @@
 img {
 
-    width: 20%;
-    height: 20%;
+    width: 150px;
+    height: 100px;
+    padding-left: 5%;
+    border: 5px;
+    padding-top: 5%;
 }
 main > div {
 
-    padding-left: 5%;
+    text-align: center;
+}
+header {
+    background-color: black;
+}
+main {
+    background-color:antiquewhite;
 }
