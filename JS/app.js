@@ -6,13 +6,29 @@ console.log(firstimg);
 var secondimg = document.getElementById('second-img');
 
 var theirdimg = document.getElementById ('theird-img'); 
+var numberofattempts = document.getElementById('submit')
+var resultButton = document.getElementById ('result-button');
 
 var minattempt =25;
-var userattempt = 0;  
+var userattempt = 1;  
 
 var firstimgindex; 
 var secondimgindex;
 var theirdimgindex; 
+
+numberofattempts.addEventListener('click',attempts)
+ function attempts (event){
+    //  console.log('test1');
+     event.preventDefault();
+    //  console.log(event);
+     
+    // console.log('test');
+     
+    minattempt=document.getElementById('number').value;
+    // minattempt=parseInt(minattempt);
+    // console.log(minattempt);
+ }
+
 
 function product (name , sourse ){
     this.name = name ;
@@ -77,6 +93,7 @@ function RandomIndex (){
     product.prototype.allImg[secondimgindex].timeofrender++;
     product.prototype.allImg[theirdimgindex].timeofrender++;
  }
+ 
 
 renderingThreeImg();
 
@@ -85,34 +102,41 @@ secondimg.addEventListener('click' , userchoise);
 theirdimg.addEventListener('click', userchoise); 
 
 function userchoise (event){
-userattempt++ ; 
+
+
+console.log(userattempt , minattempt);
 
 if (userattempt<=minattempt){
 
     if (event.target.id === 'first-img'){
         product.prototype.allImg[firstimgindex].vote++;
+        userattempt++ ; 
     }else if (event.target.id === 'second-img' ){
 product.prototype.allImg[secondimgindex].vote++;
+userattempt++ ; 
     }else if (event.target.id === 'theird-img') {
         product.prototype.allImg[theirdimgindex].vote++; 
+        userattempt++ ; 
     }
-    console.log(event.target.id)
+    // console.log(event.target.id)
         renderingThreeImg();
     
 }else {
-
- var resultList = document.getElementById('result-list');
- var result;
-for (var i = 0 ; i <product.prototype.allImg.length ; i++){
-    result = document.createElement ('li'); 
-    result.textContent = product.prototype.allImg[i].name + ' had ' + product.prototype.allImg[i].vote + ' votes,and was seen ' + product.prototype.allImg[i].timeofrender + ' times';
-    resultList.appendChild(result);  
-}
 firstimg.removeEventListener('click' , userchoise);
 secondimg.removeEventListener('click' , userchoise);
 theirdimg.removeEventListener('click', userchoise);
 
-} 
-console.log(product.prototype.allImg);
-}
+} }
+// console.log(product.prototype.allImg);
 
+
+resultButton.addEventListener('click',finalresult)
+
+function finalresult () {
+    var resultList = document.getElementById('result-list');
+    var result;
+   for (var i = 0 ; i <product.prototype.allImg.length ; i++){
+       result = document.createElement ('li'); 
+       result.textContent = product.prototype.allImg[i].name + ' had ' + product.prototype.allImg[i].vote + ' votes,and was seen ' + product.prototype.allImg[i].timeofrender + ' times';
+       resultList.appendChild(result);  
+}}
