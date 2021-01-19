@@ -8,6 +8,8 @@ var secondimg = document.getElementById('second-img');
 var theirdimg = document.getElementById ('theird-img'); 
 var numberofattempts = document.getElementById('submit')
 var resultButton = document.getElementById ('result-button');
+var resultList = document.getElementById('result-list');
+var ctx = document.getElementById('result-chart').getContext('2d');
 
 var minattempt =25;
 var userattempt = 1;  
@@ -19,6 +21,7 @@ var x1,x2,x3;
 var chartNames = [];
 var chartData =[];
 var chartTimeOfView=[];
+var storedData = [];
 
 numberofattempts.addEventListener('click',attempts)
  function attempts (event){
@@ -116,10 +119,12 @@ theirdimg.addEventListener('click', userchoise);
 
 function userchoise (event){
 
+    
 
 // console.log(userattempt , minattempt);
 
 if (userattempt<=minattempt){
+
 
     if (event.target.id === 'first-img'){
         product.prototype.allImg[firstimgindex].vote++;
@@ -137,13 +142,18 @@ userattempt++ ;
     product.prototype.allImg[secondimgindex].timeofrender++;
     product.prototype.allImg[theirdimgindex].timeofrender++;
         renderingThreeImg();
+        
+        
        
 }else {
+
+    localStorage.clear('data');
+    storage();
     
 firstimg.removeEventListener('click' , userchoise);
 secondimg.removeEventListener('click' , userchoise);
 theirdimg.removeEventListener('click', userchoise);
-resultButton.removeAttribute('disabled');
+// resultButton.removeAttribute('disabled');
 } 
 
 }
@@ -158,9 +168,24 @@ resultButton.removeAttribute('disabled');
 // console.log(chartData);
 var number ; 
 
+
+
 resultButton.addEventListener('click',finalresult)
+// console.log(resultButton);
 
 function finalresult () {
+    resultList.innerHTML='';
+    // chart.innerHTML='';
+    // ctx.innerHTML=""; 
+// console.log ('before   ....',product.prototype.allImg);
+     if (userattempt<=minattempt){
+        storedData= JSON.parse(localStorage.getItem('data'));
+        product.prototype.allImg = storedData ;
+     }else {
+
+     }
+      
+    //   console.log ('after    ...',product.prototype.allImg);
     for (var i=0; i<product.prototype.allImg.length;i++){
         chartNames.push(product.prototype.allImg[i].name);
         chartData.push(product.prototype.allImg[i].vote);
@@ -173,7 +198,8 @@ function finalresult () {
     // console.log('chartData   ',chartData);
     // console.log('chartTimeOfView   ',chartTimeOfView);
     
-    var resultList = document.getElementById('result-list');
+    
+    // resultList.innerHTML = "";
     var result;
    for (var i = 0 ; i <product.prototype.allImg.length ; i++){
        number = product.prototype.allImg[i].timeofrender;
@@ -187,7 +213,7 @@ function finalresult () {
        resultList.appendChild(result);  
 }
 // console.log(chartData);
-var ctx = document.getElementById('result-chart').getContext('2d');
+
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
@@ -217,3 +243,11 @@ var chart = new Chart(ctx, {
     options: {}
 });
 }
+
+function storage (){
+    storedData = JSON.stringify(product.prototype.allImg);
+    localStorage.setItem('data',storedData); 
+}
+
+
+
