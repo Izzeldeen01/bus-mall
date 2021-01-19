@@ -18,6 +18,7 @@ var theirdimgindex;
 var x1,x2,x3;
 var chartNames = [];
 var chartData =[];
+var chartTimeOfView=[];
 
 numberofattempts.addEventListener('click',attempts)
  function attempts (event){
@@ -103,10 +104,7 @@ function RandomIndex (){
     secondimg.src = product.prototype.allImg[secondimgindex].sourse ;
     theirdimg.src = product.prototype.allImg[theirdimgindex].sourse ;
 
-    product.prototype.allImg[firstimgindex].timeofrender++;
-
-    product.prototype.allImg[secondimgindex].timeofrender++;
-    product.prototype.allImg[theirdimgindex].timeofrender++;
+   
  }
  
 
@@ -119,7 +117,7 @@ theirdimg.addEventListener('click', userchoise);
 function userchoise (event){
 
 
-console.log(userattempt , minattempt);
+// console.log(userattempt , minattempt);
 
 if (userattempt<=minattempt){
 
@@ -135,14 +133,20 @@ userattempt++ ;
         userattempt++ ; 
     }
     // console.log(event.target.id)
+    product.prototype.allImg[firstimgindex].timeofrender++;
+    product.prototype.allImg[secondimgindex].timeofrender++;
+    product.prototype.allImg[theirdimgindex].timeofrender++;
         renderingThreeImg();
        
 }else {
+    
 firstimg.removeEventListener('click' , userchoise);
 secondimg.removeEventListener('click' , userchoise);
 theirdimg.removeEventListener('click', userchoise);
+resultButton.removeAttribute('disabled');
+} 
 
-} }
+}
 // // console.log(product.prototype.allImg);
 // for (var i=0; i<product.prototype.allImg.length;i++){
 //     chartNames.push(product.prototype.allImg[i].name);
@@ -152,7 +156,7 @@ theirdimg.removeEventListener('click', userchoise);
 
 // console.log(chartNames);
 // console.log(chartData);
-
+var number ; 
 
 resultButton.addEventListener('click',finalresult)
 
@@ -160,20 +164,29 @@ function finalresult () {
     for (var i=0; i<product.prototype.allImg.length;i++){
         chartNames.push(product.prototype.allImg[i].name);
         chartData.push(product.prototype.allImg[i].vote);
+        chartTimeOfView.push(product.prototype.allImg[i].timeofrender);
+        
         // console.log(i);
     }
     
-    console.log(chartNames);
-    console.log(chartData);
+    // console.log('chartNames   ', chartNames);
+    // console.log('chartData   ',chartData);
+    // console.log('chartTimeOfView   ',chartTimeOfView);
     
     var resultList = document.getElementById('result-list');
     var result;
    for (var i = 0 ; i <product.prototype.allImg.length ; i++){
+       number = product.prototype.allImg[i].timeofrender;
+        if (product.prototype.allImg[i].timeofrender===0){
+            number = 1;
+        }
        result = document.createElement ('li'); 
-       result.textContent = product.prototype.allImg[i].name + ' had ' + product.prototype.allImg[i].vote + ' votes,and was seen ' + product.prototype.allImg[i].timeofrender + ' times';
+       result.textContent = product.prototype.allImg[i].name + ' had ' + product.prototype.allImg[i].vote + 
+       ' votes,and was seen ' + product.prototype.allImg[i].timeofrender + ' times' + ' and got a persantage of    '+
+       ((product.prototype.allImg[i].vote/number)*100) + '  %';
        resultList.appendChild(result);  
 }
-console.log(chartData);
+// console.log(chartData);
 var ctx = document.getElementById('result-chart').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -183,12 +196,22 @@ var chart = new Chart(ctx, {
     data: {
         labels: chartNames,
         datasets: [{
-            label: 'What coustemer prefare chart',
+            label: 'Time of Selection',
             backgroundColor: 'gray',
             borderColor: 'rgb(0,0,0)',
-            data: chartData
-        }]
+            data: chartData 
+
+       
+        },{
+        label: 'Time of View',
+        backgroundColor: 'black',
+        borderColor: 'white',
+        data: chartTimeOfView 
+        }
+    ]
     },
+   
+    
 
     // Configuration options go here
     options: {}
