@@ -10,6 +10,7 @@ var numberofattempts = document.getElementById('submit')
 var resultButton = document.getElementById ('result-button');
 var resultList = document.getElementById('result-list');
 var ctx = document.getElementById('result-chart').getContext('2d');
+var resultdiv = document.getElementById('result-div');
 
 var minattempt =25;
 var userattempt = 1;  
@@ -175,17 +176,19 @@ resultButton.addEventListener('click',finalresult)
 
 function finalresult () {
     resultList.innerHTML='';
-    // chart.innerHTML='';
-    // ctx.innerHTML=""; 
+    
+    // ctx.clear(); 
 // console.log ('before   ....',product.prototype.allImg);
      if (userattempt<=minattempt){
         storedData= JSON.parse(localStorage.getItem('data'));
         product.prototype.allImg = storedData ;
      }else {
+         
 
      }
       
     //   console.log ('after    ...',product.prototype.allImg);
+    
     for (var i=0; i<product.prototype.allImg.length;i++){
         chartNames.push(product.prototype.allImg[i].name);
         chartData.push(product.prototype.allImg[i].vote);
@@ -223,7 +226,7 @@ var chart = new Chart(ctx, {
         labels: chartNames,
         datasets: [{
             label: 'Time of Selection',
-            backgroundColor: 'gray',
+            backgroundColor: 'gainsboro',
             borderColor: 'rgb(0,0,0)',
             data: chartData 
 
@@ -242,6 +245,9 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
+chartNames = [];
+ chartData =[];
+ chartTimeOfView=[];
 }
 
 function storage (){
