@@ -63,7 +63,7 @@ new product ('pen', '../img/pen.jpg');
 new product ('pet-sweep', '../img/pet-sweep.jpg');
 new product ('scissors', '../img/scissors.jpg');
 new product ('shark', '../img/shark.jpg');
-new product ('sweep', '../img/sweep.png');
+new product ('sweep', '../img/sweep.jpg');
 new product ('tauntaun', '../img/tauntaun.jpg');
 new product ('unicorn', '../img/unicorn.jpg');
 new product ('usb', '../img/usb.gif');
