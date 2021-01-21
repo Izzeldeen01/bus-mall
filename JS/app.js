@@ -49,26 +49,26 @@ function product (name , sourse ){
 
 product.prototype.allImg = []; 
 
-new product ('bag', 'img/bag.jpg');
-new product ('banana', 'img/banana.jpg');
-new product ('bathroom', 'img/bathroom.jpg');
-new product ('boots', 'img/boots.jpg');
-new product ('breakfast', 'img/breakfast.jpg');
-new product ('bubblegum', 'img/bubblegum.jpg');
-new product ('chair', 'img/chair.jpg');
-new product ('cthulhu', 'img/cthulhu.jpg');
-new product ('dog-duck', 'img/dog-duck.jpg');
-new product ('dragon', 'img/dragon.jpg');
-new product ('pen', 'img/pen.jpg');
-new product ('pet-sweep', 'img/pet-sweep.jpg');
-new product ('scissors', 'img/scissors.jpg');
-new product ('shark', 'img/shark.jpg');
-new product ('sweep', 'img/sweep.png');
-new product ('tauntaun', 'img/tauntaun.jpg');
-new product ('unicorn', 'img/unicorn.jpg');
-new product ('usb', 'img/usb.gif');
-new product ('water-can', 'img/water-can.jpg');
-new product ('wine-glass', 'img/wine-glass.jpg');
+new product ('bag', '/img/bag.jpg');
+new product ('banana', '/img/banana.jpg');
+new product ('bathroom', '/img/bathroom.jpg');
+new product ('boots', '/img/boots.jpg');
+new product ('breakfast', '/img/breakfast.jpg');
+new product ('bubblegum', '/img/bubblegum.jpg');
+new product ('chair', '/img/chair.jpg');
+new product ('cthulhu', '/img/cthulhu.jpg');
+new product ('dog-duck', '/img/dog-duck.jpg');
+new product ('dragon', '/img/dragon.jpg');
+new product ('pen', '/img/pen.jpg');
+new product ('pet-sweep', '/img/pet-sweep.jpg');
+new product ('scissors', '/img/scissors.jpg');
+new product ('shark', '/img/shark.jpg');
+new product ('sweep', '/img/sweep.png');
+new product ('tauntaun', '/img/tauntaun.jpg');
+new product ('unicorn', '/img/unicorn.jpg');
+new product ('usb', '/img/usb.gif');
+new product ('water-can', '/img/water-can.jpg');
+new product ('wine-glass', '/img/wine-glass.jpg');
 
 
 // console.log(product.prototype.allImg.length)
