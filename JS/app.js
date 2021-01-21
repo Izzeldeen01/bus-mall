@@ -226,14 +226,14 @@ var chart = new Chart(ctx, {
         labels: chartNames,
         datasets: [{
             label: 'Time of Selection',
-            backgroundColor: 'gainsboro',
-            borderColor: 'rgb(0,0,0)',
+            backgroundColor: 'rgb(192,192,192)',
+            borderColor: 'rgb(192,192,192)',
             data: chartData 
 
        
         },{
         label: 'Time of View',
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         borderColor: 'white',
         data: chartTimeOfView 
         }
